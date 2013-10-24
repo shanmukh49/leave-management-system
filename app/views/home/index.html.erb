@@ -1,0 +1,120 @@
+
+<% if current_employee  %>
+  <% if(current_employee.admin_status == true) %>
+  <div class="navbar">
+   <div class="navbar-inner">
+    <a class="brand" href=""> Leave-Management</a>
+    <ul class="nav">
+      <li ><%= link_to 'Registration', new_admin_employee_path %></li>
+      <li><%= link_to  'Employees', admin_employees_path %></li>
+      <li><%= link_to 'Leaves', admin_leave_infos_path %></li>
+      <li><%= link_to '#Salary', admin_salaries_path %></li>
+    </ul>  
+    <ul class ="nav pull-right">
+      <li><%= link_to 'logout', destroy_employee_session_path, :method => :delete %></li>
+    </ul>
+   </div>
+ </div>
+  <div class="container">
+    <div class="hero-unit">
+      <h2>Welcome!</h2><br />
+      <p><h4>Admin:  <%= current_employee.personal_info.name.capitalize %></h4></p>
+    </div>
+  <div>
+    
+  <% else %> 
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#"> Leave-Management</a>
+      <ul class="nav">
+        <li><%= link_to 'Leave application',new_leave_info_path %></li>
+        <li><%= link_to 'Total leaves',leave_infos_path %></li>
+        <li><%= link_to 'Personal information', personal_info_path(current_employee.personal_info.id) %></li>
+        
+      </ul>
+      <ul class="nav pull-right">
+        <li><%= link_to 'logout', destroy_employee_session_path, :method => :delete %></li>
+      </ul>
+    </div>
+  </div>
+    <div class="container">
+      <div class="hero-unit">
+        <h2>Welcome!</h2><br />
+        <p><h4>Employee : <%= current_employee.personal_info.name.capitalize %></h4></p>
+      </div>
+    <div>
+ 
+    
+  <% end%>
+<% else %>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="/"> Leave-Management</a>
+        <ul class = "nav">
+        </ul>
+        <ul class="nav pull-right">
+          <li><%= link_to '<i class = "icon-user"></i>Sign in'.html_safe,  new_employee_session_path %></li>
+        </ul>
+      </div>
+    </div>
+    
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h2>Welcome!,Siltek Employee</h2>
+        
+        <p><%#= link_to 'Sign in'.html_safe,  new_employee_session_path, :class => "btn btn-primary btn-large" %></p>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span4">
+          <h2>Website Details</h2>
+          <p>http://siltek.net/</p>
+          <p><a class="btn" href="http://siltek.net/">View details »</a></p>
+        </div>
+        <div class="span4">
+          <h2>Emails</h2>
+          <p>
+            E-mail: hr@siltek.net
+          </p>
+          <p><a class="btn" href="http://siltek.net/">View details »</a></p>
+       </div>
+        <div class="span4">
+          <h2>Contact</h2>
+          <p>Siltek Software Solutions (I) Pvt. Ltd.<br./>
+B-Block, 5th Floor<br./>
+Kanthi Sikhara Complex,<br./>
+Panjagutta, Hyderabad - 500 082<br./>
+Andhra Pradesh, INDIA<br./>
+Tel: 91-40-2340 8900<br./>
+
+info@siltek.net<br./>
+
+www.siltek.net<br./>
+          </p>
+          <p><a class="btn" href="http://siltek.net/contact.aspx">View details »</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy;  Siltek Software Solutions (I) Pvt. Ltd.</p>
+      </footer>
+
+    </div> <!-- /container -->
+<% end %>  
+
+
+
+
+
+
+
+
+
+

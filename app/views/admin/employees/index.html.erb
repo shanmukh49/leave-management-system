@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="row-fluid">
+    <div class="offset1 span11 well">
+      <p id="notice"><%= notice %></p>
+      <center><legend>Listing Employees</legend></center>    
+      <table class="table">
+        <tr>
+          <th>Email</th>
+          <th>Name</th> 
+          <th>Date Of Joining</th>
+          <th>Admin Status</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          </tr>
+      <% @employees.each do |employee| %>
+        <tr>          
+          <td><%= link_to  employee.email ,admin_employee_path(employee) %></td>
+         
+          <% if employee.personal_info.present? %>
+            <td><%= employee.personal_info.name %></td>
+          <% end %>
+          <td><%= employee.date_of_joining %></td>
+          <td><%= employee.admin_status %></td>
+          <td><%= link_to '<i class=" icon-edit" ></i> Edit'.html_safe, edit_admin_employee_path(employee), :class => "btn btn-info" %></td>
+          <td><%= link_to '<i class=" icon-remove" ></i> Destroy'.html_safe, admin_employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+      </table>
+      <br />
+    </div>
+  </div>
+</div>
+      
+

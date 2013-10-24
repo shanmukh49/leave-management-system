@@ -1,0 +1,84 @@
+<%= javascript_include_tag "autocomplete-rails.js" %>
+<div class="container">
+  <div class="row-fluid">
+    <div class="offset2 span8 well">
+      <%= form_for(@leave_info, :validate => true) do |f| %>
+        <% if @leave_info.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@leave_info.errors.count, "error") %> prohibited this leave_info from being saved:</h2>
+
+            <ul>
+            <% @leave_info.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <br /><%= f.label :to_email_ids %>
+          <%= f.autocomplete_field :to_email_ids, autocomplete_employee_email_admin_leave_infos_path, :style => "width:300px;", 'data-delimiter' => ',' , :multiple => true %>
+        </div>
+        <div class="field">
+          <br /><%= f.label :cc_email_ids %>
+          <%= f.autocomplete_field :cc_email_ids, autocomplete_employee_email_admin_leave_infos_path, :style => "width:300px;", 'data-delimiter' => ',' , :multiple => true %>
+        </div>
+
+        <div class="field">
+          <%= f.hidden_field(:employee_id, :value => current_employee.id) %>
+        </div>
+        
+        <div class="field">
+           <%= f.hidden_field(:leave_status, :value => "pending") %>
+        </div>
+        
+        <div class="field">
+          <br /><%= f.label :start_date %>
+          <%= f.text_field :start_date, :class => 'datepicker' %>
+        </div>
+        <div class="field">
+          <%= f.label :end_date %>
+          <%= f.text_field :end_date, :class => 'datepicker' %>
+        </div>
+        <div class="field">
+        
+          <br /><%= f.label :status_of_day %>
+          <%= f.select(:status_of_day, [[' Full ', 1],[' Half', 0.5]]) %>
+        </div>
+        <div class="field">
+          <%= f.label :reason_of_leave %><br />
+          <%= f.text_area(:reason_of_leave, :rows => "5", :cols => "40") %>
+        </div>
+        <div class="field">
+           <p><%= f.check_box :reference_status %>
+              If you don't make own leave then click on checkbox</p>
+        </div>
+        
+        <div class="field" style="visibility:hidden;" id="applicant_field">
+          <p>Applicant Email</p>
+          <%= f.autocomplete_field :applicant_id, autocomplete_employee_email_admin_leave_infos_path, :style => "width:300px;" %>
+        </div>
+        
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+$('.datepicker').datepicker({"format": "yyyy-mm-dd", "weekStart": 0, "autoclose": true});
+
+  $('#leave_info_reference_status').click(function()
+  {
+    if($(this).is(':checked'))
+      {
+        $('#applicant_field').css("visibility","visible");
+      }
+    else
+      {
+        $('#applicant_field').css("visibility","hidden");
+      }
+  });
+</script>
