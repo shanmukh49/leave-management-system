@@ -13,9 +13,9 @@ gem 'execjs'
 gem 'jquery-ui-rails'
 
 end
-
+gem 'heroku'
 group :production do
-  #gem 'pg'
+  gem 'pg'
 end
 
 #gem 'client_side_validations'
