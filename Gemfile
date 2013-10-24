@@ -14,6 +14,7 @@ gem 'jquery-ui-rails'
 
 end
 gem 'heroku'
+gem 'haml'
 group :production do
   gem 'pg'
 end
